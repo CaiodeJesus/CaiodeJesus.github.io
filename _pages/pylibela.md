@@ -1,5 +1,5 @@
 ---
-permalink: /pyLiBeLa/
+permalink: /pyLiBELa/
 title: "pyLiBELa"
 ---
 
