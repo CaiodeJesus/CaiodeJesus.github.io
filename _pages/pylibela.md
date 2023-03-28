@@ -130,9 +130,25 @@ g++ -fPIC -shared -I/usr/include/python3.10 -I/usr/include/openbabel3 -I/usr/inc
 
 - In Google Collab, the code is compiled. But, as the library is imported on python, it shows the following error message appears
 ![image](https://user-images.githubusercontent.com/84737515/227987066-1f2b9750-d897-4143-8cf4-edf03d3a873c.png)
+- The Collab error was fixed by adding the -lopenbabel at the end
 
 
-
+Creating a makefile:
+ - Learning how to create a makefile
+ - Creating a makefile to compile all the .so libraries
+ - Create another one to compile on Google Collab
+ 
+ Results:
+ - Created a makefile that compiles every dinamic library with by tiping only 'make'
+ - The BOOST error appears for every line of code compiled -> fix that in the future
+ 
+ 
+ 
+ 
+ Useful links:
+ https://embarcados.com.br/introducao-ao-makefile/
+ https://github.com/alessandronascimento/LiBELa/blob/master/trunk/src/LiBELa/Makefile
+ 
 
 
 
