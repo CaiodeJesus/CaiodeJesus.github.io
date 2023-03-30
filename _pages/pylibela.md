@@ -165,7 +165,7 @@ Creating a makefile:
  #include "pyWRITER.h"
  #include "pyWRITER.cpp"
  ```
- - The approach we did to the pyGrid file doesn't work for the pyFindHB file. It still shows the following error:
+and do the same with the pyFindHB file, but include the pyCOORD_MC.* files instead.
  
   
  
