@@ -45,15 +45,18 @@ Tried to Adapt new Mol2 class to pyLiBELa:
 
 Results:
 - The Mol2 class doesn't work in Google Collab showing the following error message:
+
 ```yaml
 In file included from pyMol2.cpp:8:
 pyMol2.h:21:10: fatal error: openbabel/obconversion.h: No such file or directory
    21 | #include <openbabel/obconversion.h>
       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~
 compilation terminated.
+```
 
  - In the local computer, it still shows the message
  
+ ```yaml
  In file included from /usr/include/boost/smart_ptr/detail/sp_thread_sleep.hpp:22,
                  from /usr/include/boost/smart_ptr/detail/yield_k.hpp:23,
                  from /usr/include/boost/smart_ptr/detail/spinlock_gcc_atomic.hpp:14,
@@ -73,6 +76,7 @@ compilation terminated.
       | ^~~~~~~~~~~~~~~~~~~~
 /usr/include/boost/detail/iterator.hpp:13:1: note: ‘#pragma message: This header is deprecated. Use <iterator> instead.’
    13 | BOOST_HEADER_DEPRECATED("<iterator>")
+   
 ```
 
 but as the .so archives are compiled, we ignore it.
