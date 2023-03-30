@@ -20,7 +20,9 @@ Adapting WRITER class to pyLiBELa:
 - upload it to github and test in Google Collab
 
 How to generate a shared library with BOOST:
- g++ -Wall -Wextra -fPIC -shared / - example.cpp -o example.so -lboost_python37 -lboost_numpy37
+```yaml
+g++ -Wall -Wextra -fPIC -shared / - example.cpp -o example.so -lboost_python37 -lboost_numpy37
+```
 
 Steps I followed to adapt it with boost:
 - Know the class funcions and variables by looking at the .h file
@@ -43,7 +45,7 @@ Tried to Adapt new Mol2 class to pyLiBELa:
 
 Results:
 - The Mol2 class doesn't work in Google Collab showing the following error message:
-
+```yaml
 In file included from pyMol2.cpp:8:
 pyMol2.h:21:10: fatal error: openbabel/obconversion.h: No such file or directory
    21 | #include <openbabel/obconversion.h>
@@ -71,7 +73,8 @@ compilation terminated.
       | ^~~~~~~~~~~~~~~~~~~~
 /usr/include/boost/detail/iterator.hpp:13:1: note: ‘#pragma message: This header is deprecated. Use <iterator> instead.’
    13 | BOOST_HEADER_DEPRECATED("<iterator>")
-   
+```
+
 but as the .so archives are compiled, we ignore it.
 
 
@@ -85,14 +88,19 @@ Adapting new Mol2 class to pyLiBELa:
 How to generate the libraries for each class:
 
 PARSER
+```yaml
 g++ -fPIC -shared -I/usr/include/python3.10 -I/usr/include/openbabel3 -I/usr/include/eigen3 pyPARSER.cpp -o pyPARSER.so -L/usr/lib/x86_64-linux-gnu -lboost_python310
+```
 
 WRITER
+```yaml
 g++ -fPIC -shared -DBUILD=0 -I/usr/include/python3.10 -I/usr/include/openbabel3 -I/usr/include/eigen3 pyWRITER.cpp -o pyWRITER.so -L/usr/lib/x86_64-linux-gnu -lboost_python310 -lz
- 
-Mol2
-g++ -fPIC -shared -DHAVE_EIGEN -I/usr/include/python3.10 -I/usr/include/openbabel3 -I/usr/include/eigen3 pyMol2.cpp -o pyMol2.so -L/usr/lib/x86_64-linux-gnu -lboost_python310 -lz
+```
 
+Mol2
+```yaml
+g++ -fPIC -shared -DHAVE_EIGEN -I/usr/include/python3.10 -I/usr/include/openbabel3 -I/usr/include/eigen3 pyMol2.cpp -o pyMol2.so -L/usr/lib/x86_64-linux-gnu -lboost_python310 -lz
+```
  
 Adapting Grid class to pyLiBELa:
  
@@ -103,8 +111,9 @@ Results:
 - The Grid class can be turned into a dinamic library in Google Collab and in the local machine through the following command line:
 
 Grid
+```yaml
 g++ -fPIC -shared -DBUILD=0 -I/usr/include/python3.10 -I/usr/include/openbabel3 -I/usr/include/eigen3 pyGrid.cpp pyWRITER.cpp -o pyGrid.so -L/usr/lib/x86_64-linux-gnu -lboost_python310 -lz
-
+```
 
 
 
@@ -118,8 +127,9 @@ Results:
 - The COORD_MC class can be turned into a dinamic library in Google Collab and in the local machine through the following command line:
 
 COORD_MC
+```yaml
 g++ -fPIC -shared -I/usr/include/python3.10 -I/usr/include/openbabel3 -I/usr/include/eigen3 pyCOORD_MC.cpp -o pyCOORD_MC.so -L/usr/lib/x86_64-linux-gnu -lboost_python310
-
+```
 
 
 Adapting FindHB class to pyLiBELa
@@ -128,7 +138,9 @@ Results:
 - The FindHB class can be turned into a dinamic library in the local machine
 
 FindHB
+```yaml
 g++ -fPIC -shared -I/usr/include/python3.10 -I/usr/include/openbabel3 -I/usr/include/eigen3 pyCOORD_MC.cpp -o pyCOORD_MC.so -L/usr/lib/x86_64-linux-gnu -lboost_python310
+```
 
 - In Google Collab, the code is compiled. But, as the library is imported on python, it shows the following error message appears
 ![image](https://user-images.githubusercontent.com/84737515/227987066-1f2b9750-d897-4143-8cf4-edf03d3a873c.png)
@@ -138,18 +150,24 @@ g++ -fPIC -shared -I/usr/include/python3.10 -I/usr/include/openbabel3 -I/usr/inc
 Creating a makefile:
  - Learning how to create a makefile
  - Creating a makefile to compile all the .so libraries
- - Create another one to compile on Google Collab
+ - Create another one to compile on Google Colab
  
  Results:
  - Created a makefile that compiles every dinamic library with by tiping only 'make'
  - The BOOST error appears for every line of code compiled -> fix that in the future
+ - The makefile to the [Google Colab version](https://colab.research.google.com/github/alessandronascimento/pyLiBELa/blob/main/Colabs/makefile_test.ipynb) works, but the libraries pyGrid and pyFindHB can't be imported.
+ - The pyGrid library can be imported if you add the following lines to the pyGrid.cpp file:
+ ```yaml
+ #include "pyWRITER.h"
+ #include "pyWRITER.cpp"
+ ```
+ - The approach we did to the pyGrid file doesn't work for the pyFindHB file. It still shows the following error:
  
- 
- 
+  
  
  Useful links:
- https://embarcados.com.br/introducao-ao-makefile/
- https://github.com/alessandronascimento/LiBELa/blob/master/trunk/src/LiBELa/Makefile
+ - [Introdução ao makefile](https://embarcados.com.br/introducao-ao-makefile/)
+ - [LiBELa's original makefile](https://github.com/alessandronascimento/LiBELa/blob/master/trunk/src/LiBELa/Makefile)
  
 
 
