@@ -1,6 +1,8 @@
 ---
 permalink: /pyLiBELa/
 title: "pyLiBELa"
+excerpt: "My current undergraduate reaserch program, the adaptation of the LiBELa software to python."
+toc: true
 ---
 
 
