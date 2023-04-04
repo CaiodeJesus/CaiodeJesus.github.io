@@ -12,7 +12,7 @@ toc: true
 
 ## Week 1
 
-### Adapting WRITER class to pyLiBELa:
+### Adapting WRITER class to pyLiBELa
 
 - read the pyPARSER and pyMOL2 classes to understand how it works
 - boost WRITER.cpp and WRITER.h 
@@ -37,7 +37,7 @@ Results:
 - The WRITER class is now adapted to pyLiBELa
 
 
-### Tried to Adapt new Mol2 class to pyLiBELa:
+### Tried to Adapt new Mol2 class to pyLiBELa
 
 - see the history log in [Source code](https://github.com/alessandronascimento/LiBELa/blob/master/trunk/src/LiBELa/Mol2.cpp)
 - boost new functions and variables
@@ -83,7 +83,7 @@ but as the .so archives are compiled, we ignore it.
 
 ## Week 2
 
-### Adapting new Mol2 class to pyLiBELa:
+### Adapting new Mol2 class to pyLiBELa
 
 - fixing the fatal error adding the g++ flags: -DHAVE_EIGEN; -I/usr/include/openbabel3; -I/usr/include/eigen3
 - fixing an error by defining the str variable differently
@@ -109,7 +109,7 @@ Mol2
 g++ -fPIC -shared -DHAVE_EIGEN -I/usr/include/python3.10 -I/usr/include/openbabel3 -I/usr/include/eigen3 pyMol2.cpp -o pyMol2.so -L/usr/lib/x86_64-linux-gnu -lboost_python310 -lz
 ```
  
-### Adapting Grid class to pyLiBELa:
+### Adapting Grid class to pyLiBELa
  
 - boost the variables and functions of the class
 - adapt the variable info as the variable str of the Mol2 class 
@@ -129,7 +129,7 @@ g++ -fPIC -shared -DBUILD=0 -I/usr/include/python3.10 -I/usr/include/openbabel3 
 
 ## Week 3
 
-### Adapting COORD_MC class to pyLiBELa:
+### Adapting COORD_MC class to pyLiBELa
 - Downloaded the RAND.h from LiBELa's source code and renamed it to pyRAND.h
 - Downloaded the gsl library to local machine
 
@@ -161,7 +161,7 @@ g++ -fPIC -shared -I/usr/include/python3.10 -I/usr/include/openbabel3 -I/usr/inc
 - The Collab error was fixed by adding the -lopenbabel at the end
 
 
-### Creating a makefile:
+### Creating a makefile
  - Learning how to create a makefile
  - Creating a makefile to compile all the .so libraries
  - Create another one to compile on Google Colab
