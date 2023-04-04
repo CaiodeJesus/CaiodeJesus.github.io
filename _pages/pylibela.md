@@ -37,7 +37,7 @@ Results:
 - The WRITER class is now adapted to pyLiBELa
 
 
-###Tried to Adapt new Mol2 class to pyLiBELa:
+### Tried to Adapt new Mol2 class to pyLiBELa:
 
 - see the history log in [Source code](https://github.com/alessandronascimento/LiBELa/blob/master/trunk/src/LiBELa/Mol2.cpp)
 - boost new functions and variables
@@ -83,7 +83,7 @@ but as the .so archives are compiled, we ignore it.
 
 ## Week 2
 
-###Adapting new Mol2 class to pyLiBELa:
+### Adapting new Mol2 class to pyLiBELa:
 
 - fixing the fatal error adding the g++ flags: -DHAVE_EIGEN; -I/usr/include/openbabel3; -I/usr/include/eigen3
 - fixing an error by defining the str variable differently
@@ -95,18 +95,21 @@ PARSER
 ```yaml
 g++ -fPIC -shared -I/usr/include/python3.10 -I/usr/include/openbabel3 -I/usr/include/eigen3 pyPARSER.cpp -o pyPARSER.so -L/usr/lib/x86_64-linux-gnu -lboost_python310
 ```
-
+<p align="center">
 WRITER
+</p>
 ```yaml
 g++ -fPIC -shared -DBUILD=0 -I/usr/include/python3.10 -I/usr/include/openbabel3 -I/usr/include/eigen3 pyWRITER.cpp -o pyWRITER.so -L/usr/lib/x86_64-linux-gnu -lboost_python310 -lz
 ```
 
+<p align="center">
 Mol2
+</p>
 ```yaml
 g++ -fPIC -shared -DHAVE_EIGEN -I/usr/include/python3.10 -I/usr/include/openbabel3 -I/usr/include/eigen3 pyMol2.cpp -o pyMol2.so -L/usr/lib/x86_64-linux-gnu -lboost_python310 -lz
 ```
  
-###Adapting Grid class to pyLiBELa:
+### Adapting Grid class to pyLiBELa:
  
 - boost the variables and functions of the class
 - adapt the variable info as the variable str of the Mol2 class 
@@ -114,7 +117,10 @@ g++ -fPIC -shared -DHAVE_EIGEN -I/usr/include/python3.10 -I/usr/include/openbabe
 Results:
 - The Grid class can be turned into a dinamic library in Google Collab and in the local machine through the following command line:
 
+<p align="center">
 Grid
+</p>
+
 ```yaml
 g++ -fPIC -shared -DBUILD=0 -I/usr/include/python3.10 -I/usr/include/openbabel3 -I/usr/include/eigen3 pyGrid.cpp pyWRITER.cpp -o pyGrid.so -L/usr/lib/x86_64-linux-gnu -lboost_python310 -lz
 ```
@@ -123,25 +129,29 @@ g++ -fPIC -shared -DBUILD=0 -I/usr/include/python3.10 -I/usr/include/openbabel3 
 
 ## Week 3
 
-###Adapting COORD_MC class to pyLiBELa:
+### Adapting COORD_MC class to pyLiBELa:
 - Downloaded the RAND.h from LiBELa's source code and renamed it to pyRAND.h
 - Downloaded the gsl library to local machine
 
 Results:
 - The COORD_MC class can be turned into a dinamic library in Google Collab and in the local machine through the following command line:
 
+<p align="center">
 COORD_MC
+</p>
 ```yaml
 g++ -fPIC -shared -I/usr/include/python3.10 -I/usr/include/openbabel3 -I/usr/include/eigen3 pyCOORD_MC.cpp -o pyCOORD_MC.so -L/usr/lib/x86_64-linux-gnu -lboost_python310
 ```
 
 
-###Adapting FindHB class to pyLiBELa
+### Adapting FindHB class to pyLiBELa
 
 Results:
 - The FindHB class can be turned into a dinamic library in the local machine
 
+<p align="center">
 FindHB
+</p>
 ```yaml
 g++ -fPIC -shared -I/usr/include/python3.10 -I/usr/include/openbabel3 -I/usr/include/eigen3 pyCOORD_MC.cpp -o pyCOORD_MC.so -L/usr/lib/x86_64-linux-gnu -lboost_python310
 ```
@@ -151,7 +161,7 @@ g++ -fPIC -shared -I/usr/include/python3.10 -I/usr/include/openbabel3 -I/usr/inc
 - The Collab error was fixed by adding the -lopenbabel at the end
 
 
-###Creating a makefile:
+### Creating a makefile:
  - Learning how to create a makefile
  - Creating a makefile to compile all the .so libraries
  - Create another one to compile on Google Colab
@@ -176,7 +186,7 @@ and do the same with the pyFindHB file, but include the pyCOORD_MC.* files inste
  
 ## Week 4
 
-###Adapting Energy2 class to pyLiBELa
+### Adapting Energy2 class to pyLiBELa
 
 Now that we have a makefile, testing needs to be done in four steps:
 - individually in the local machine
@@ -249,7 +259,7 @@ Notes:
 Useful links:
 - To search for specific parts of the code go to this [link](https://github.com/alessandronascimento/LiBELa/search?l=C%2B%2B&q=)
 
-####Adapting Conformer class to pyLiBELa
+### Adapting Conformer class to pyLiBELa
 
 Results:
 - The following message appears:
