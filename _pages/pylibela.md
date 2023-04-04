@@ -13,7 +13,7 @@ toc: true
 
 ### Week 1
 
-Adapting WRITER class to pyLiBELa:
+#### Adapting WRITER class to pyLiBELa:
 
 - read the pyPARSER and pyMOL2 classes to understand how it works
 - boost WRITER.cpp and WRITER.h 
@@ -33,7 +33,7 @@ Steps I followed to adapt it with boost:
 Notes:
 - The local machine uses python3.10.6 while Collab uses python3.9.16
 - If the function has more than one possible input, adapt it as [TNG](https://github.com/TNG/boost-python-examples/blob/main/09-Overloading/overload.cpp)
-
+- [pyLiBELa on github](https://github.com/alessandronascimento/pyLiBELa)
 Results:
 - The WRITER class is now adapted to pyLiBELa
 
@@ -172,7 +172,94 @@ and do the same with the pyFindHB file, but include the pyCOORD_MC.* files inste
  Useful links:
  - [Introdução ao makefile](https://embarcados.com.br/introducao-ao-makefile/)
  - [LiBELa's original makefile](https://github.com/alessandronascimento/LiBELa/blob/master/trunk/src/LiBELa/Makefile)
+ - [GNU make documentation](https://www.gnu.org/software/make/manual/make.html)
  
+ ### Week 4
+
+Adapting Energy2 class to pyLiBELa
+
+Now that we have a makefile, testing needs to be done in four steps:
+- individually in the local machine
+```yaml
+g++ -fPIC -shared -I/usr/include/python3.10 -I/usr/include/openbabel3 -I/usr/include/eigen3 pyCLASS.cpp -o pyCLASS.so -L/usr/lib/x86_64-linux-gnu -lboost_python310
+```
+- with the other classes through the Makefile
+```yaml
+make
+```
+in the pyLiBELa folder. The files will be transformed in .so dinamnic libraries that will be found in the obj/ directory. To delete everything, you just need to type
+```yaml
+make clean
+```
+- individually in Google Colab
+- with the other classes through the [Colab Makefile](https://colab.research.google.com/github/alessandronascimento/pyLiBELa/blob/main/Colabs/Working_Example.ipynb) 
+
+Notes:
+- Shift+Ctrl+V pastes in the terminal
+- Ctrl+C interrupts the command
+- To search for specific parts of the code go to this [link](https://github.com/alessandronascimento/LiBELa/search?l=C%2B%2B&q=)
+
+Results:
+- The .so library can be compiled locally
+- If we add the new files to the Makefile on the Colab repository, it can be imported in Google Colab.
+
+Notes:
+- In this class we had a "subclass" called GridInterpol, written in the .h file as
+```yaml
+class Energy2 {
+public:
+    struct GridInterpol{
+        double vdwA;
+        double vdwB;
+        double elec;
+        double pbsa;
+        double delphi;
+        double solv_gauss;
+        double rec_solv_gauss;
+        double hb_donor;
+        double hb_acceptor;
+    };
+```
+so we had to define it in a separate space in the boost appendage
+
+```yaml
+    class_<Energy2::GridInterpol>("GridInterpol")
+            .def_readwrite("vdwA", & Energy2::GridInterpol::vdwA)
+            .def_readwrite("vdwB", & Energy2::GridInterpol::vdwB)
+            .def_readwrite("elec", & Energy2::GridInterpol::elec)
+            .def_readwrite("pbsa", & Energy2::GridInterpol::pbsa)
+            .def_readwrite("delphi", & Energy2::GridInterpol::delphi)
+            .def_readwrite("solv_gauss", & Energy2::GridInterpol::solv_gauss)
+            .def_readwrite("rec_solv_gauss", & Energy2::GridInterpol::rec_solv_gauss)
+            .def_readwrite("hb_donor", & Energy2::GridInterpol::hb_donor)
+            .def_readwrite("hb_acceptor", & Energy2::GridInterpol::hb_acceptor)
+    ;
+```
+and where it appeared as an argument for trilinear_interpolation(), we put it as Energy2::GridInterpol.
+
+- In Colab, if the following error appears
+```yaml
+ImportError: /content/pyEnergy2.so: undefined symbol: _ZTI4Grid
+```
+just add the corresponding class to the .cpp file. In this case, the Energy2 class depends on the Grid class, so we add to the pyEnergy.cpp file the file
+```yaml
+#include "pyGrid.cpp"
+```
+and it works.
+
+
+
+Adapting Conformer class to pyLiBELa
+
+Results:
+- The following message appears:
+```yaml
+pyConformer.cpp: In member function ‘bool Conformer::generate_conformers_confab(PARSER*, Mol2*, std::string)’:
+pyConformer.cpp:92:11: error: ‘class OpenBabel::OBForceField’ has no member named ‘DiverseConfGen’
+   92 |     OBff->DiverseConfGen(0.5, Input->conf_search_trials, 50.0, false);
+      |           ^~~~~~~~~~~~~~
+```
+
 
 
 
