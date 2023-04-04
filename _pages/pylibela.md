@@ -256,21 +256,34 @@ Notes:
 - Shift+Ctrl+V pastes in the terminal
 - Ctrl+C interrupts the command in the terminal
 
+
+
 Useful links:
 - To search for specific parts of the source code go to this [link](https://github.com/alessandronascimento/LiBELa/search?l=C%2B%2B&q=)
 - .md files [tutorial](https://www.markdowntutorial.com) 
 
 ### Adapting Conformer class to pyLiBELa
 
-Results:
-- The following message appears:
+Notes:
+- The following message appeared
 ```yaml
 pyConformer.cpp: In member function ‘bool Conformer::generate_conformers_confab(PARSER*, Mol2*, std::string)’:
 pyConformer.cpp:92:11: error: ‘class OpenBabel::OBForceField’ has no member named ‘DiverseConfGen’
    92 |     OBff->DiverseConfGen(0.5, Input->conf_search_trials, 50.0, false);
       |           ^~~~~~~~~~~~~~
 ```
+and the error was fixed by adding to the terminal line a -DHAVE_EIGEN.
+ 
+Results:
+- The Conformer class is ready to be used both in the local machine and in the Google Collab
 
+### Updating Makefiles
+- Creating an external Makefile for testing in the local machine so that there is only one Makefile, the one from Google Colab.
+- Updating the Colab Makefile to be able to compile one function at a time.
+
+### Adapting RAND, Gaussian and Optimizer classes to LiBELa
+- RAND and Gaussian can be compiled in the local machine
+- 
 
 
 
