@@ -257,7 +257,7 @@ Notes:
 - Ctrl+C interrupts the command in the terminal
 
 Useful links:
-- To search for specific parts of the code go to this [link](https://github.com/alessandronascimento/LiBELa/search?l=C%2B%2B&q=)
+- To search for specific parts of the source code go to this [link](https://github.com/alessandronascimento/LiBELa/search?l=C%2B%2B&q=)
 
 ### Adapting Conformer class to pyLiBELa
 
@@ -271,7 +271,6 @@ pyConformer.cpp:92:11: error: ‘class OpenBabel::OBForceField’ has no member 
 ```
 
 
-jgkjg
 
 
 
