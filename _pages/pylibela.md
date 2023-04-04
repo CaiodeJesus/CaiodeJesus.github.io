@@ -7,13 +7,12 @@ toc: true
 
 
 
-# **Reports**
+# **Weekly Reports**
 
-## Weekly Reports 
 
-### Week 1
+## Week 1
 
-#### Adapting WRITER class to pyLiBELa:
+### Adapting WRITER class to pyLiBELa:
 
 - read the pyPARSER and pyMOL2 classes to understand how it works
 - boost WRITER.cpp and WRITER.h 
@@ -38,7 +37,7 @@ Results:
 - The WRITER class is now adapted to pyLiBELa
 
 
-Tried to Adapt new Mol2 class to pyLiBELa:
+###Tried to Adapt new Mol2 class to pyLiBELa:
 
 - see the history log in [Source code](https://github.com/alessandronascimento/LiBELa/blob/master/trunk/src/LiBELa/Mol2.cpp)
 - boost new functions and variables
@@ -82,16 +81,17 @@ compilation terminated.
 but as the .so archives are compiled, we ignore it.
 
 
-### Week 2
+## Week 2
 
-Adapting new Mol2 class to pyLiBELa:
+###Adapting new Mol2 class to pyLiBELa:
 
 - fixing the fatal error adding the g++ flags: -DHAVE_EIGEN; -I/usr/include/openbabel3; -I/usr/include/eigen3
 - fixing an error by defining the str variable differently
 
-How to generate the libraries for each class:
-
+How to generate the libraries for each class so far:
+<p align="center">
 PARSER
+</p>
 ```yaml
 g++ -fPIC -shared -I/usr/include/python3.10 -I/usr/include/openbabel3 -I/usr/include/eigen3 pyPARSER.cpp -o pyPARSER.so -L/usr/lib/x86_64-linux-gnu -lboost_python310
 ```
@@ -106,7 +106,7 @@ Mol2
 g++ -fPIC -shared -DHAVE_EIGEN -I/usr/include/python3.10 -I/usr/include/openbabel3 -I/usr/include/eigen3 pyMol2.cpp -o pyMol2.so -L/usr/lib/x86_64-linux-gnu -lboost_python310 -lz
 ```
  
-Adapting Grid class to pyLiBELa:
+###Adapting Grid class to pyLiBELa:
  
 - boost the variables and functions of the class
 - adapt the variable info as the variable str of the Mol2 class 
@@ -121,9 +121,9 @@ g++ -fPIC -shared -DBUILD=0 -I/usr/include/python3.10 -I/usr/include/openbabel3 
 
 
 
-### Week 3
+## Week 3
 
-Adapting COORD_MC class to pyLiBELa:
+###Adapting COORD_MC class to pyLiBELa:
 - Downloaded the RAND.h from LiBELa's source code and renamed it to pyRAND.h
 - Downloaded the gsl library to local machine
 
@@ -136,7 +136,7 @@ g++ -fPIC -shared -I/usr/include/python3.10 -I/usr/include/openbabel3 -I/usr/inc
 ```
 
 
-Adapting FindHB class to pyLiBELa
+###Adapting FindHB class to pyLiBELa
 
 Results:
 - The FindHB class can be turned into a dinamic library in the local machine
@@ -151,7 +151,7 @@ g++ -fPIC -shared -I/usr/include/python3.10 -I/usr/include/openbabel3 -I/usr/inc
 - The Collab error was fixed by adding the -lopenbabel at the end
 
 
-Creating a makefile:
+###Creating a makefile:
  - Learning how to create a makefile
  - Creating a makefile to compile all the .so libraries
  - Create another one to compile on Google Colab
@@ -174,9 +174,9 @@ and do the same with the pyFindHB file, but include the pyCOORD_MC.* files inste
  - [LiBELa's original makefile](https://github.com/alessandronascimento/LiBELa/blob/master/trunk/src/LiBELa/Makefile)
  - [GNU make documentation](https://www.gnu.org/software/make/manual/make.html)
  
- ### Week 4
+## Week 4
 
-Adapting Energy2 class to pyLiBELa
+###Adapting Energy2 class to pyLiBELa
 
 Now that we have a makefile, testing needs to be done in four steps:
 - individually in the local machine
@@ -194,17 +194,7 @@ make clean
 - individually in Google Colab
 - with the other classes through the [Colab Makefile](https://colab.research.google.com/github/alessandronascimento/pyLiBELa/blob/main/Colabs/Working_Example.ipynb) 
 
-Notes:
-- Shift+Ctrl+V pastes in the terminal
-- Ctrl+C interrupts the command
-- To search for specific parts of the code go to this [link](https://github.com/alessandronascimento/LiBELa/search?l=C%2B%2B&q=)
-
-Results:
-- The .so library can be compiled locally
-- If we add the new files to the Makefile on the Colab repository, it can be imported in Google Colab.
-
-Notes:
-- In this class we had a "subclass" called GridInterpol, written in the .h file as
+In this class we had a "subclass" called GridInterpol, written in the .h file as
 ```yaml
 class Energy2 {
 public:
@@ -237,7 +227,8 @@ so we had to define it in a separate space in the boost appendage
 ```
 and where it appeared as an argument for trilinear_interpolation(), we put it as Energy2::GridInterpol.
 
-- In Colab, if the following error appears
+
+In Colab, if the following error appears
 ```yaml
 ImportError: /content/pyEnergy2.so: undefined symbol: _ZTI4Grid
 ```
@@ -247,9 +238,18 @@ just add the corresponding class to the .cpp file. In this case, the Energy2 cla
 ```
 and it works.
 
+Results:
+- The .so library can be compiled locally
+- If we add the new files to the Makefile on the Colab repository, it can be imported in Google Colab.
 
+Notes:
+- Shift+Ctrl+V pastes in the terminal
+- Ctrl+C interrupts the command in the terminal
 
-Adapting Conformer class to pyLiBELa
+Useful links:
+- To search for specific parts of the code go to this [link](https://github.com/alessandronascimento/LiBELa/search?l=C%2B%2B&q=)
+
+####Adapting Conformer class to pyLiBELa
 
 Results:
 - The following message appears:
