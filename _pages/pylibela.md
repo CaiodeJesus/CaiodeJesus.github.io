@@ -283,7 +283,40 @@ Results:
 
 ### Adapting RAND, Gaussian and Optimizer classes to LiBELa
 - RAND and Gaussian can be compiled in the local machine
-- 
+
+
+- Listed the dependencies of pyLiBELa library
+- updated the local and Colab makefiles
+-     now we can make one class at a time
+-     
+- doing library McEntropy
+- library SA
+- library MC
+      changed the info variable as in Grid
+
+error:
+```yaml
+pyLiBELa/src/pyMC.cpp: In member function ‘void MC::run(Mol2*, Mol2*, Mol2*, std::vector<std::vector<double> >, PARSER*, double)’:
+pyLiBELa/src/pyMC.cpp:1015:23: warning: format ‘%f’ expects argument of type ‘double’, but argument 3 has type ‘long double’ [-Wformat=]
+ 1015 |         sprintf(info, "Boltzmann-weighted average energy: %10.3f kcal/mol @ %7.2f K", this->Boltzmann_weighted_average_energy, T);
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                                                             |
+      |                                                                                             long double
+```
+fixed by changing in the line 1015 the %10.3f to a %10.3Lf, so that is has type long double (Lf).
+
+
+error:
+```yaml
+pyLiBELa/src/pyMC.cpp: In constructor ‘MC::MC(Mol2*, PARSER*, WRITER*)’:
+pyLiBELa/src/pyMC.cpp:73:19: warning: format ‘%d’ expects argument of type ‘int’, but argument 3 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+   73 |     sprintf(info, "Found %d rotatable bonds in ligand %s.", RotorList.Size(), Lig->molname.c_str());
+      |                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  ~~~~~~~~~~~~~~~~
+      |                                                                           |
+      |                                                                           size_t {aka long unsigned int}
+```
+fixed by changing in the line 73 the %d to a %lu, so that is has type long unsigned int.
+
 
 
 
