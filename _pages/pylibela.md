@@ -281,20 +281,26 @@ Results:
 - Creating an external Makefile for testing in the local machine so that there is only one Makefile, the one from Google Colab.
 - Updating the Colab Makefile to be able to compile one function at a time.
 
-### Adapting RAND, Gaussian and Optimizer classes to LiBELa
-- RAND and Gaussian can be compiled in the local machine
+### Adapting RAND and Gaussian classes to LiBELa
+- RAND and Gaussian can be compiled in the local machine and in Google Colab
 
 
-- Listed the dependencies of pyLiBELa library
-- updated the local and Colab makefiles
+### Listed the dependencies of pyLiBELa library
+- The dependencies of each class can be now viewed on the following tables
+![image](https://user-images.githubusercontent.com/84737515/230207467-f9f2b71f-b0e4-4d38-8263-071dd60d66a4.png)
+![image](https://user-images.githubusercontent.com/84737515/230207513-a4ccae75-61e3-4cc9-9a8b-de1eb5333998.png)
+
+## Updated the local and Colab makefiles
 -     now we can make one class at a time
 -     
-- doing library McEntropy
-- library SA
-- library MC
+### Adapting MC and classes to LiBELa
+- The classes work on the local machine
+
+- In the MC class, the following errors appeared
       changed the info variable as in Grid
 
-error:
+Notes:
+- In the MC class, the following error appeared
 ```yaml
 pyLiBELa/src/pyMC.cpp: In member function ‘void MC::run(Mol2*, Mol2*, Mol2*, std::vector<std::vector<double> >, PARSER*, double)’:
 pyLiBELa/src/pyMC.cpp:1015:23: warning: format ‘%f’ expects argument of type ‘double’, but argument 3 has type ‘long double’ [-Wformat=]
@@ -303,10 +309,9 @@ pyLiBELa/src/pyMC.cpp:1015:23: warning: format ‘%f’ expects argument of type
       |                                                                                             |
       |                                                                                             long double
 ```
-fixed by changing in the line 1015 the %10.3f to a %10.3Lf, so that is has type long double (Lf).
+and was fixed by changing in the line 1015 the %10.3f to a %10.3Lf, so that is has type long double (Lf).
 
-
-error:
+This also appeared
 ```yaml
 pyLiBELa/src/pyMC.cpp: In constructor ‘MC::MC(Mol2*, PARSER*, WRITER*)’:
 pyLiBELa/src/pyMC.cpp:73:19: warning: format ‘%d’ expects argument of type ‘int’, but argument 3 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
@@ -315,7 +320,7 @@ pyLiBELa/src/pyMC.cpp:73:19: warning: format ‘%d’ expects argument of type �
       |                                                                           |
       |                                                                           size_t {aka long unsigned int}
 ```
-fixed by changing in the line 73 the %d to a %lu, so that is has type long unsigned int.
+and was fixed by changing in the line 73 the %d to a %lu, so that is has type long unsigned int.
 
 
 
