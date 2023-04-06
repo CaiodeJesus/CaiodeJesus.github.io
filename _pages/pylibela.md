@@ -292,8 +292,8 @@ Results:
 both available at this [Google Sheets](https://docs.google.com/spreadsheets/d/1O8RrHqa47ECNAhhuMptmBpY7jB9al0Y9AmVeFnsZ9FI/edit?usp=sharing)
 
 And they can be turned into a graph 
-![image](https://user-images.githubusercontent.com/84737515/230400385-1f721a17-796a-4c20-8ad0-90411b7cccad.png)
-throught [this script](https://colab.research.google.com/drive/1qgiUBcMtLVN0AS0UV3XsEmcUh1bSfe_p#scrollTo=pchgsO0vijc2)
+![image](https://user-images.githubusercontent.com/84737515/230405794-b8790516-82c5-40d3-97af-440eaf08743b.png)
+throught [this script](https://colab.research.google.com/drive/1qgiUBcMtLVN0AS0UV3XsEmcUh1bSfe_p?usp=sharing)
 ## Updated the local and Colab makefiles
 -     now we can make one class at a time
 -     
