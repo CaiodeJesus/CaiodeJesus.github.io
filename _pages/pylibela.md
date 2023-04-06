@@ -354,13 +354,37 @@ pyLiBELa/src/pyDocker.cpp:266:31: warning: format ‘%d’ expects argument of t
 it was fixed by changing formatted string in line 29 from "%5d %-12.12s %-4.4s %-10.3e  %-8.3g %-8.3g %-8.3g %-8.2f %-8.3g %3d %2d **%2d** %.2f" 
 to "%5d %-12.12s %-4.4s %-10.3e  %-8.3g %-8.3g %-8.3g %-8.2f %-8.3g %3d %2d **%2f** %.2f" and do the same thing in line 266.
 
-- The following error still remains:
-![image](https://user-images.githubusercontent.com/84737515/230476649-87230148-8f8e-4530-8c2b-a17820663ce5.png)
+- The following error still remains
+```yaml 
+pyLiBELa/src/pyOptimizer.cpp: In function ‘void init_module_pyOptimizer()’:
+pyLiBELa/src/pyOptimizer.cpp:1516:76: error: no matches converting function ‘evaluate_energy’ to type ‘double (class Optimizer::*)(class Mol2*, class std::vector<std::vector<double> >)’
+ 1516 |     double (Optimizer::*ee1)(Mol2*, vector<vector<double> >) = &Optimizer::evaluate_energy;
+      |                                                                            ^~~~~~~~~~~~~~~
+pyLiBELa/src/pyOptimizer.cpp:75:6: note: candidates are: ‘static void Optimizer::evaluate_energy(Mol2*, std::vector<std::vector<double> >, energy_result_t*)’
+   75 | void Optimizer::evaluate_energy(Mol2* Lig2, vector<vector<double> > new_xyz, energy_result_t* energy_result){
+      |      ^~~~~~~~~
+pyLiBELa/src/pyOptimizer.cpp:48:8: note:                 ‘static double Optimizer::evaluate_energy(Mol2*, std::vector<std::vector<double> >)’
+   48 | double Optimizer::evaluate_energy(Mol2* Lig2, vector<vector<double> > new_xyz){
+      |        ^~~~~~~~~
+pyLiBELa/src/pyOptimizer.cpp:1517:94: error: no matches converting function ‘evaluate_energy’ to type ‘void (class Optimizer::*)(class Mol2*, class std::vector<std::vector<double> >, struct energy_result_t*)’
+ 1517 | izer::*ee2)(Mol2*, vector<vector<double> >, energy_result_t*) = &Optimizer::evaluate_energy;
+      |                                                                             ^~~~~~~~~~~~~~~
+
+pyLiBELa/src/pyOptimizer.cpp:75:6: note: candidates are: ‘static void Optimizer::evaluate_energy(Mol2*, std::vector<std::vector<double> >, energy_result_t*)’
+   75 | void Optimizer::evaluate_energy(Mol2* Lig2, vector<vector<double> > new_xyz, energy_result_t* energy_result){
+      |      ^~~~~~~~~
+pyLiBELa/src/pyOptimizer.cpp:48:8: note:                 ‘static double Optimizer::evaluate_energy(Mol2*, std::vector<std::vector<double> >)’
+   48 | double Optimizer::evaluate_energy(Mol2* Lig2, vector<vector<double> > new_xyz){
+      |        ^~~~~~~~~
+make: *** [Makefile:115: Optimizer] Error 1
+
+```
 
 it is probably due to the fact that the functions in this class are defined as static, [this approach found on the internet](https://wiki.python.org/moin/boost.python/FunctionOverloading) didn't work.
 
-Useful link:
--[Static Method C++](https://wiki.python.org/moin/boost.python/FunctionOverloading)
+Useful links:
+- [Static Method C++](https://wiki.python.org/moin/boost.python/FunctionOverloading)
+
 ### Adapting Docker classe to LiBELa
 - Adapted tha info variable as Grid
 
