@@ -289,11 +289,11 @@ Results:
 - The dependencies of each class can be now viewed on the following tables
 ![image](https://user-images.githubusercontent.com/84737515/230401109-ed64b0a7-b108-48dc-927b-b17bdbd96059.png)
 ![image](https://user-images.githubusercontent.com/84737515/230401589-f1f04a9b-c4eb-4825-9430-4a64587cfb84.png)
-both available at this (Google Sheets)[https://docs.google.com/spreadsheets/d/1O8RrHqa47ECNAhhuMptmBpY7jB9al0Y9AmVeFnsZ9FI/edit?usp=sharing]
+both available at this [Google Sheets](https://docs.google.com/spreadsheets/d/1O8RrHqa47ECNAhhuMptmBpY7jB9al0Y9AmVeFnsZ9FI/edit?usp=sharing)
 
 And they can be turned into a graph 
 ![image](https://user-images.githubusercontent.com/84737515/230400385-1f721a17-796a-4c20-8ad0-90411b7cccad.png)
-throught (this script)[https://colab.research.google.com/drive/1qgiUBcMtLVN0AS0UV3XsEmcUh1bSfe_p#scrollTo=pchgsO0vijc2]
+throught [this script](https://colab.research.google.com/drive/1qgiUBcMtLVN0AS0UV3XsEmcUh1bSfe_p#scrollTo=pchgsO0vijc2)
 ## Updated the local and Colab makefiles
 -     now we can make one class at a time
 -     
