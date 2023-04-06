@@ -293,13 +293,12 @@ Results:
 ## Updated the local and Colab makefiles
 -     now we can make one class at a time
 -     
-### Adapting MC and classes to LiBELa
+### Adapting McEntropy, MC and SA classes to LiBELa
 - The classes work on the local machine
 
-- In the MC class, the following errors appeared
-      changed the info variable as in Grid
-
 Notes:
+- In the MC class, I adapted the info variable as in Grid
+
 - In the MC class, the following error appeared
 ```yaml
 pyLiBELa/src/pyMC.cpp: In member function ‘void MC::run(Mol2*, Mol2*, Mol2*, std::vector<std::vector<double> >, PARSER*, double)’:
@@ -324,8 +323,38 @@ and was fixed by changing in the line 73 the %d to a %lu, so that is has type lo
 
 
 
+### Adapting Optimitzer class to LiBELa
+- The following error appeared
+
+```yaml
+pyLiBELa/src/pyDocker.cpp: In member function ‘void Docker::run(Mol2*, Mol2*, Mol2*, std::vector<double>, PARSER*, unsigned int)’:
+pyLiBELa/src/pyDocker.cpp:129:31: warning: format ‘%d’ expects argument of type ‘int’, but argument 14 has type ‘double’ [-Wformat=]
+  129 |                 sprintf(info, "%5d %-12.12s %-4.4s %-10.3e  %-8.3g %-8.3g %-8.3g %-8.2f %-8.3g %3d %2d %2d %.2f", counter, Lig->molname.c_str(), Lig->resnames[0].c_str(), overlay_fmax,
+      |                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  130 |                         0.0, 0.0, 0.0, 0.0, 0.0, -1, overlay_status, 0.0, si);
+      |                                                                      ~~~
+      |                                                                      |
+      |                                                                      double
+pyLiBELa/src/pyDocker.cpp: In member function ‘void Docker::run(Mol2*, Mol2*, Mol2*, std::vector<double>, PARSER*, Grid*, unsigned int)’:
+pyLiBELa/src/pyDocker.cpp:266:31: warning: format ‘%d’ expects argument of type ‘int’, but argument 14 has type ‘double’ [-Wformat=]
+  266 |                 sprintf(info, "%5d %-12.12s %-4.4s %-10.3e  %-8.3g %-8.3g %-8.3g %-8.2f %-8.3g %3d %2d %2d %.2f", counter, Lig->molname.c_str(), Lig->resnames[0].c_str(), overlay_fmax,
+      |                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  267 |                         0.0, 0.0, 0.0, 0.0, 0.0, -1, overlay_status, 0.0, si);
+      |                                                                      ~~~
+      |                                                                      |
+      |                                                                      double
+```
+
+it was fixed by changing formatted string in line 29 from "%5d %-12.12s %-4.4s %-10.3e  %-8.3g %-8.3g %-8.3g %-8.2f %-8.3g %3d %2d **%2d** %.2f" 
+to "%5d %-12.12s %-4.4s %-10.3e  %-8.3g %-8.3g %-8.3g %-8.2f %-8.3g %3d %2d **%2f** %.2f" and do the same thing in line 266.
 
 
+### Adapting Docker classe to LiBELa
+- Adapted tha info variable as Grid
+
+### Adapting FullSearch class to LiBELa
+
+- Adapted the info variable as in Grid
 
 
 
