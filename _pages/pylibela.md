@@ -355,7 +355,7 @@ it was fixed by changing formatted string in line 29 from "%5d %-12.12s %-4.4s %
 to "%5d %-12.12s %-4.4s %-10.3e  %-8.3g %-8.3g %-8.3g %-8.2f %-8.3g %3d %2d **%2f** %.2f" and do the same thing in line 266.
 
 - The following error still remains
-```yaml 
+```yaml
 pyLiBELa/src/pyOptimizer.cpp: In function ‘void init_module_pyOptimizer()’:
 pyLiBELa/src/pyOptimizer.cpp:1516:76: error: no matches converting function ‘evaluate_energy’ to type ‘double (class Optimizer::*)(class Mol2*, class std::vector<std::vector<double> >)’
  1516 |     double (Optimizer::*ee1)(Mol2*, vector<vector<double> >) = &Optimizer::evaluate_energy;
@@ -377,7 +377,6 @@ pyLiBELa/src/pyOptimizer.cpp:48:8: note:                 ‘static double Optimi
    48 | double Optimizer::evaluate_energy(Mol2* Lig2, vector<vector<double> > new_xyz){
       |        ^~~~~~~~~
 make: *** [Makefile:115: Optimizer] Error 1
-
 ```
 
 it is probably due to the fact that the functions in this class are defined as static, [this approach found on the internet](https://wiki.python.org/moin/boost.python/FunctionOverloading) didn't work.
