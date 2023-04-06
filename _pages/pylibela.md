@@ -293,10 +293,12 @@ both available at this [Google Sheets](https://docs.google.com/spreadsheets/d/1O
 
 And they can be turned into a graph 
 ![image](https://user-images.githubusercontent.com/84737515/230405794-b8790516-82c5-40d3-97af-440eaf08743b.png)
-throught [this script](https://colab.research.google.com/drive/1qgiUBcMtLVN0AS0UV3XsEmcUh1bSfe_p?usp=sharing)
+throught [this script](https://colab.research.google.com/drive/1qgiUBcMtLVN0AS0UV3XsEmcUh1bSfe_p?usp=sharing), 
+and cleaned to higher depedencies 
+![image](https://user-images.githubusercontent.com/84737515/230448040-c8fac1ab-c879-4ee4-9846-7f23ec989039.png)
 
 ### Updated the local and Colab makefiles
--     now we can make one class at a time
+-     Now we can make one class at a time
     
 ### Adapting McEntropy, MC and SA classes to LiBELa
 - The classes work on the local machine
