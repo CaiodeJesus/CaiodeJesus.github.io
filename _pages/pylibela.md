@@ -355,9 +355,8 @@ it was fixed by changing formatted string in line 29 from "%5d %-12.12s %-4.4s %
 to "%5d %-12.12s %-4.4s %-10.3e  %-8.3g %-8.3g %-8.3g %-8.2f %-8.3g %3d %2d **%2f** %.2f" and do the same thing in line 266.
 
 - The following error still remains:
-```yaml
 ![image](https://user-images.githubusercontent.com/84737515/230476649-87230148-8f8e-4530-8c2b-a17820663ce5.png)
-```
+
 it is probably due to the fact that the functions in this class are defined as static, [this approach found on the internet](https://wiki.python.org/moin/boost.python/FunctionOverloading) didn't work.
 
 Useful link:
