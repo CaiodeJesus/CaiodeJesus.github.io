@@ -369,7 +369,6 @@ pyLiBELa/src/pyOptimizer.cpp:48:8: note:                 ‘static double Optimi
 pyLiBELa/src/pyOptimizer.cpp:1517:94: error: no matches converting function ‘evaluate_energy’ to type ‘void (class Optimizer::*)(class Mol2*, class std::vector<std::vector<double> >, struct energy_result_t*)’
  1517 | izer::*ee2)(Mol2*, vector<vector<double> >, energy_result_t*) = &Optimizer::evaluate_energy;
       |                                                                             ^~~~~~~~~~~~~~~
-
 pyLiBELa/src/pyOptimizer.cpp:75:6: note: candidates are: ‘static void Optimizer::evaluate_energy(Mol2*, std::vector<std::vector<double> >, energy_result_t*)’
    75 | void Optimizer::evaluate_energy(Mol2* Lig2, vector<vector<double> > new_xyz, energy_result_t* energy_result){
       |      ^~~~~~~~~
