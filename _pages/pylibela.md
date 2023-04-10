@@ -351,9 +351,14 @@ pyLiBELa/src/pyDocker.cpp:266:31: warning: format ‘%d’ expects argument of t
       |                                                                      double
 ```
 
-it was fixed by changing formatted string in line 29 from "%5d %-12.12s %-4.4s %-10.3e  %-8.3g %-8.3g %-8.3g %-8.2f %-8.3g %3d %2d **%2d** %.2f" 
-to "%5d %-12.12s %-4.4s %-10.3e  %-8.3g %-8.3g %-8.3g %-8.2f %-8.3g %3d %2d **%2f** %.2f" and do the same thing in line 266.
-
+it was fixed by changing formatted string in line 29 from 
+```yaml
+%5d %-12.12s %-4.4s %-10.3e  %-8.3g %-8.3g %-8.3g %-8.2f %-8.3g %3d %2d **%2d** %.2f
+```
+to 
+```yaml
+"%5d %-12.12s %-4.4s %-10.3e  %-8.3g %-8.3g %-8.3g %-8.2f %-8.3g %3d %2d **%2f** %.2f" and do the same thing in line 266.
+```
 - The following error still remains
 ```yaml
 pyLiBELa/src/pyOptimizer.cpp: In function ‘void init_module_pyOptimizer()’:
@@ -381,14 +386,34 @@ make: *** [Makefile:115: Optimizer] Error 1
 it is probably due to the fact that the functions in this class are defined as static, [this approach found on the internet](https://wiki.python.org/moin/boost.python/FunctionOverloading) didn't work.
 
 Useful links:
-- [Static Method C++](https://wiki.python.org/moin/boost.python/FunctionOverloading)
+- [Static Keyword C++](https://www.geeksforgeeks.org/static-keyword-cpp/)
 
-### Adapting Docker classe to LiBELa
+
+
+## Week 4
+### Apadting Optimizer class to LiBELa
+- In order to solve the static overload error shown in [Week3](https://caiodejesus.github.io/pyLiBELa/#adapting-optimitzer-class-to-libela), I created another function evaluate_energy2 that corresponds to the version with three arguments. So, in pyOptimizer.cpp pyOptimizer.h scripts, the evaluate_energy method with the energy_t parameter was changed to evaluate_energy2.
+
+- An attempt to solve any remaining static function errors, every function had an added .staticmethod() as below
+
+```yaml
+.def("name_of_function", & CLASS::name_of_function).staticmethod("name_of_function")
+``` 
+
+### Adapting Docker class to LiBELa
 - Adapted tha info variable as Grid
+- It works in the local machine
+
 
 ### Adapting FullSearch class to LiBELa
 
 - Adapted the info variable as in Grid
+- Some format errors were solved in lines 43 and 94, changing from "%d" to "%lu".
+- It still shows the following error
 
-
-
+```yaml
+pyLiBELa/src/pyFullSearch.cpp: In member function ‘double FullSearch::do_search()’:
+pyLiBELa/src/pyFullSearch.cpp:211:1: warning: no return statement in function returning non-void [-Wreturn-type]
+  211 | }
+      | ^
+```
