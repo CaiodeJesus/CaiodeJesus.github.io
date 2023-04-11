@@ -329,7 +329,7 @@ and was fixed by changing in the line 73 the %d to a %lu, so that is has type lo
 
 
 
-### Adapting Optimitzer class to LiBELa
+### Adapting Optimizer class to LiBELa
 - The following error appeared
 
 ```yaml
