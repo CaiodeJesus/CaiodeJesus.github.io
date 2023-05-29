@@ -391,7 +391,7 @@ Useful links:
 
 
 ## Week 4
-### Apadting Optimizer class to LiBELa
+### Adapting Optimizer class to LiBELa
 - In order to solve the static overload error shown in [Week3](https://caiodejesus.github.io/pyLiBELa/#adapting-optimitzer-class-to-libela), I created another function evaluate_energy2 that corresponds to the version with three arguments. So, in pyOptimizer.cpp pyOptimizer.h scripts, the evaluate_energy method with the energy_t parameter was changed to evaluate_energy2.
 
 - An attempt to solve any remaining static function errors, every function had an added .staticmethod() as below
@@ -464,7 +464,7 @@ There is a need to reevaluate the way static functions are defined in pyOptimize
 ### Updating Makefile 
 - Google Colab Updated its Python version to Python 3.10.11 so we have to adapt our code to it.
 
-- Try to replicate [LiBELa's original Makefile]() 
+- Try to replicate [LiBELa's original Makefile](https://github.com/alessandronascimento/LiBELa/blob/master/trunk/src/LiBELa/Makefile) 
 
 
 
@@ -472,9 +472,9 @@ There is a need to reevaluate the way static functions are defined in pyOptimize
 
 - We still have some issues about static members of pyOptimizer: Rec, RefLig, Grids and Parser. There are issues with class linkage. The methods are compiled, but Python can’t identify the static members on Colab.
 
-- [I chatted a bit about these issues with ChatGPT]() to gain some insight into this matter. 
+- [I chatted a bit about these issues with ChatGPT](https://drive.google.com/file/d/1aAAmklzb6iXtwqUtBZ8H3yoHy7cy9535/view?usp=sharing) to gain some insight into this matter. 
 
-- Tried to adapt some policies suggested by Chat GPT and analyse the errors that appeared. The result is in this [file]().
+- Tried to adapt some policies suggested by Chat GPT and analyse the errors that appeared. It was inconclusive.
 
 
 - We solved the issue by creating a get_Rec function as shown in the Bogo to Bogo link below. We now need to create similar functions with RefLig, Parser and Grids.
@@ -495,7 +495,8 @@ There is a need to reevaluate the way static functions are defined in pyOptimize
 - [Bogo to Bogo](https://www.bogotobogo.com/cplusplus/statics.php)
 
 
-week 8?
+## Week 8
+
  versão antiga
  !ls /usr/lib/x86_64-linux-gnu/libboost_python*
  	mostra que tenho instalado o libboost_python38.so.1.71.0
@@ -538,7 +539,7 @@ muita coisa pra baixar pro colab, limitei pra os que começam com 1A*, são 25
 agora o desafio é o loop
 
 
-week 15 maio
+## Week 10
 flag e linkagem no openmp
 
 	só precisa do -fopemmp: https://stackoverflow.com/questions/12002304/how-to-compile-openmp-using-g
@@ -695,7 +696,7 @@ proximos passos
 	testa com uma e duas threads e vê a alteração no tempo de execução
 
 
-semana 22 maio
+## Week 11
 
 visualização no colab
 	resolvi o de aparecer o resíduo todo e de aumentar a janela
@@ -766,7 +767,15 @@ próximas etapas: ver colabs de visuzaliação
 rodar no cluster
 
 
+## Week 12
+
+### Setting up to run pyLiBELa on the Cluster.
+- Creating a working local version of the [pyLiBELa Collab](https://colab.research.google.com/github/alessandronascimento/pyLiBELa/blob/main/Colabs/pyLiBELa.ipynb#scrollTo=mmqpdtV1CU49).
 
 
+tentando fazer rodar no cluster
+colocar a biblioteca glibc lá
+
+fiz código local
 
 
