@@ -1,14 +1,14 @@
 ---
 permalink: /pyLiBELa/
 title: "pyLiBELa"
-excerpt: "My current undergraduate research program, the adaptation of the LiBELa software to python. The proposal is in this [link](https://drive.google.com/file/d/1kp_QNQqQRvjkVPcNEV61AbLVYqu8VRCy/view?usp=sharing)."
+excerpt: "My current undergraduate research program, the adaptation of the LiBELa software to python. "
 toc: true
 ---
 
 
 
 # **Weekly Reports**
-
+The proposal is in this [link](https://drive.google.com/file/d/1kp_QNQqQRvjkVPcNEV61AbLVYqu8VRCy/view?usp=sharing).
 
 ## Week 1
 
