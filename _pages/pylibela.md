@@ -422,13 +422,17 @@ pyLiBELa/src/pyFullSearch.cpp:211:1: warning: no return statement in function re
 
 ### Updating Makefile
       
-- It takes 3 minutes to build the .o files
-
+- It takes 3 minutes to build the .o files. It is done in three steps?
+```yaml
+make FILES #downloads the source code
+make OBJECTS #generates the .o files
+make LINKAGE #generates the .so libraries
+```
 - Checking the depedencies between the libraries
 
 - Added the Docker class to the github Makefile
 
-- We still have issues with pySA and pyMc. They depend on the Grid class and can't be compiled 
+- We still have issues with pySA and pyMc. They depend on the Grid class and can't be compiled.
 
 - The Optimizer class shows the following error when imported:
 ```yaml
@@ -466,7 +470,7 @@ There is a need to reevaluate the way static functions are defined in pyOptimize
 
 - Try to replicate [LiBELa's original Makefile](https://github.com/alessandronascimento/LiBELa/blob/master/trunk/src/LiBELa/Makefile) 
 
-
+- Now the objects (.o files) are created and linked to static libraries (.so) in a following step.
 
 ### Static issues Optimizer
 
@@ -497,76 +501,67 @@ There is a need to reevaluate the way static functions are defined in pyOptimize
 
 ## Week 8
 
- versão antiga
+### Boost versions
+- When we type in the Colab environment
+```yaml
  !ls /usr/lib/x86_64-linux-gnu/libboost_python*
- 	mostra que tenho instalado o libboost_python38.so.1.71.0
- 	queremo o libboost_python310.so.1.74.0
-na maquina local, com um 
-	apt-cache search libboost-python
-aparece ja 
-	libboost-python1.74.0 - Boost.Python Library
-no colab só aparece
-	libboost-python1.71.0 - Boost.Python Library
+```
+it shows that it has libboost_python38.so.1.71.0 installed. 
+- In our local machine, we have libboost_python310.so.1.74.0 and it is promptly shown in
+```yaml
+apt-cache search libboost-python
+```
+- In Colab, this command shows only
+```yaml
+libboost-python1.71.0 - Boost.Python Library
+```
 
-alessandro ja tinha reajustado
+### Update Makefile
 
-pyOptimizer ainda com erro
+- Added Docker and FullSearch classes to the Makefile
+- The class pyOptimizer is now working!! We had issues with the static members Rec, RefLig, Parser, and Grids. In order to solve it, we had to define the functions getRec, getRefLig, getParser and getGrids outside of the Optimizer class. Then, we did the boost wrapper with a appropriate return policy:
+```yaml
+.def("get_Rec", get_Rec, return_value_policy<return_by_value>())
+```
 
-atualizei makefile - novas classes docker e fullsearch, por mais que ainda nao tenha funcionado o optimizer certinho
+### Finishing pyLiBELa
 
-usando o qtcreator na maquina local pra compilar
-ver como usa o cmake
+-We now have a [Working Colab](https://github.com/alessandronascimento/pyLiBELa/blob/main/Colabs/pyLiBELa.ipynb) that downloads the source code and builds pyLiBELa from the Makefile.
 
--fPIC -O3 -I/usr/local/include/python3.10 -I/usr/include/openbabel3 -I/usr/include/eigen3 -DBUILD=0 -DHAVE_EIGEN -Wunused-value -L/usr/lib/x86_64-linux-gnu -lboost_python310 -lz -lopenbabel -lgsl -lnlopt_cxx -lgsl -lgslcblas -lm 
- 
- 
- Concluímos a pyOptimizer!!!
+### SB database
 
-Versão finalizada do Colab em https://github.com/alessandronascimento/pyLiBELa/blob/main/Colabs/pyLiBELa.ipynb
-Começando testes com a base de dados SB
-
-	baixei pelo site https://ringo.ams.stonybrook.edu/index.php/SB2021.v1
-	escrevi um script para organizar melhor (organizer)
-		reduzi de 556,9MB para 165,8 MB
-	subindo pro drive
-	
-	
-gpu??? https://towardsdatascience.com/downloading-datasets-into-google-drive-via-google-colab-bcb1b30b0166
-muita coisa pra baixar pro colab, limitei pra os que começam com 1A*, são 25
+- We are now starting to evaluate pyLiBELa`s performance.
+- The SB 2021 Docking Database available [here](https://ringo.ams.stonybrook.edu/index.php/SB2021.v1).
+- The Database has 1,172 protein-ligand complexes each with a directory containing four files. As we are interested only in the structure of the protein and the ligand, I wrote a script that removes everything else reducing its size from 556,9 MB to 165,8 MB. This clean SB was uploaded to my GoogleDrive.
+- The pyLiBELa Collab can now acess the SB database so tests can be run.
+- The next challenge is to write a script that calculates the Grids for a number of protein-ligand complexes.
 
 
+## Week 9
 
-agora o desafio é o loop
+### OpenMP linkage
+
+- According to [StackOverflow](https://stackoverflow.com/questions/12002304/how-to-compile-openmp-using-g), we only need to add the -fopenmp flag to link this library.
+- Updated the makefile and it works!
 
 
 ## Week 10
-flag e linkagem no openmp
 
-	só precisa do -fopemmp: https://stackoverflow.com/questions/12002304/how-to-compile-openmp-using-g
-	alterei no makefile
-	
-	
-abri o box.pdb com a função la
-
-consegui fazer a visualização - ver asana
-
-	centrado no ligante
-	mostrando aa vizinhos
-	ligante destacado
-	box.pdb gerado com caixa
+### Molecular visualization
+- We need to prepare a Colab environment in which our docking can be seen.
+- The java based py3Dmol can be used and opens the box.pdb file. ![image](https://github.com/CaiodeJesus/CaiodeJesus.github.io/assets/84737515/6ff1d5fe-da34-49ad-8955-af42770bf1b5)
+- We seek a viewer with the following characteristics: centered on the ligand, showing neighbour residues, highlighting the ligand and with the box around it.
+- In order to use the py3Dmol library better, we could convert the SB dataset files to .pdb format. We can do it by using the openbabel library
+```yaml
+obabel -imol2 rec.mol2.gz -opdb -O rec.pdb
+```
+- We managed to view the ligand, the box, the protein and an inorganic compound that was only noticed when the .pdb file was opened in Pymol. This inorganic compound can be visualized if you manually type the inorganic elements that can be found in a list. If there is an element from that list, it is shown in the spheres mode.
+![image](https://github.com/CaiodeJesus/CaiodeJesus.github.io/assets/84737515/7b0aa724-9d3e-484f-931a-47e319bd9b27)
 
 
 
 
-alessandro fez isso
-	1. calcula as distâncias atomicas de todos os atomos (mol2 e COOR_MC) - definir máxima distância interatomica
-		fazer um loop pros 1200
-		ai estimar a caixa
-		
-conferir numero de threads na maquina virtual google
-	ele só tem 2 mesmo
-	ver com !cat /proc/cpuinfo
-	siblings?
+
 		
 só falta os aa destacados
 (colocar prints)
@@ -595,7 +590,7 @@ END
 
 
 
-#tira o end e o conect do arquivo do receptor
+#tira o end e o conect do arquivo do receptor 
 !sed -i '/END\|CONECT/d' $name_file_rec 
 !tail $name_file_rec
 
@@ -685,18 +680,41 @@ END
 name_file_merge = pdb_code + '.pdb'
 !cat $name_file_rec $name_file_lig > $name_file_merge #concatena os arquivos
 
+-Now we can manipulate the chains separately and view the following image.
+![image](https://github.com/CaiodeJesus/CaiodeJesus.github.io/assets/84737515/b1c8865f-90a6-4d92-b693-5b5f2dc0e8c7)
 
 
 
 
-	
-proximos passos
-	aumentar grid_spacing e ver como impacta as energias e o tempo
-		gráfico pra esse primeiro caso: tempo de execução x 
-	testa com uma e duas threads e vê a alteração no tempo de execução
+### pyLiBELa Docking Grids
 
+- When we calculate the energy through a Grid that is smaller than the ligand, it increases a lot. So we need an estimate of the minimum grid size in which all the ligand could fit. Here we have, for example, the 121P pair with a grid that results in a very high energy. We can see that it gets outside of the calculated grid. ![image](https://github.com/CaiodeJesus/CaiodeJesus.github.io/assets/84737515/adfcdbf0-5d99-43d6-b54f-40d5b748980b)
+- We have a distribution of the greatest interatomic distance in the following histogram ![image](https://github.com/CaiodeJesus/CaiodeJesus.github.io/assets/84737515/f6140c9d-6d7a-452b-a015-41ae33620985) with [this](https://github.com/alessandronascimento/LiBELa/blob/master/trunk/src/tools/max_dist.cpp) code. That means we need to calculate grids with size 30 in order to fit all the ligands. 
+- We checked the number of threads in the Virtual Machine in Google Colab. By tiping 
+```yaml
+!cat /proc/cpuinfo
+```
+we learn that it only has 2 available threads.
+
+### Useful Links
+https://colab.research.google.com/drive/1CTtUGg05-2MtlWmfJhqzLTtkDDaxCDOQ#scrollTo=qCwsUBpmYof5
+
+https://colab.research.google.com/github/CCBatIIT/modelingworkshop/blob/main/labs/1-1/py3DMol.ipynb
+https://nbviewer.org/github/3dmol/3Dmol.js/blob/master/py3Dmol/examples.ipynb
+https://colab.research.google.com/github/pb3lab/ibm3202/blob/master/tutorials/lab02_molviz.ipynb#scrollTo=DroiHRaGOxle
 
 ## Week 11
+
+Pra colocar pra mostrar o resíduo inteiro, era só colocar a flag 'byres':True
+O problema é que isso seleciona a cadeia principal também, não só a lateral. Preciso ver como eu resolvo isso pra não aparecer esses átomos.
+
+Consegui alterar o tamanho da janela com os argumentos height e width no view().
+cd
+caio.dejesusoliveira@usp.brHá 7 dias.
+Consegui fazer aparecer o Magnésio do 121P colocando pra mostrar todos da cadeia  que não pertencem a lista de aminoácidos. O estranho é que ele muda a nomeclatura de alguns, então talvez apareça algum fora, mas aí pe só atualizar a lista. Por exemplo, tem uma histidina com comeclatura 'HIE' ao invés da 'HIS' padrão.
+Vou deixar a parte da cadeia principal à mostra mesmo. Se eu encontrar alguém que tenha tirado eu atualizo o colab lá.
+![image](https://github.com/CaiodeJesus/CaiodeJesus.github.io/assets/84737515/fec689c4-905c-457f-9763-a7b71109a0c9)
+
 
 visualização no colab
 	resolvi o de aparecer o resíduo todo e de aumentar a janela
@@ -719,6 +737,11 @@ vendo se o timeit é em segundos (13s)
 	  b+=i
 	time = timeit.default_timer() - start_time
 	print(time)
+
+![image](https://github.com/CaiodeJesus/CaiodeJesus.github.io/assets/84737515/642f9d61-4ebd-42f5-b13e-ec220e07c4ed)
+
+
+
 
 testar o espaçamento dos grids e o erro percentual
 	vimos que é 30 A pelo gráfico (colocar gŕafico asana)
@@ -764,7 +787,12 @@ testar script pra máquina local
 
 
 próximas etapas: ver colabs de visuzaliação
-rodar no cluster
+rodar no cluster (http://nascimento.ifsc.usp.br/wordpress/?page_id=53)
+
+com uma e duas threads
+Fiz pra 0.4 e pros outros valores acertando os parâmetros iniciais
+https://docs.google.com/spreadsheets/d/19CZs9mP9e16ygpjpaHuikuSXUSl9sgjryzwWawZ_bpI/edit?usp=sharing
+
 
 
 ## Week 12
