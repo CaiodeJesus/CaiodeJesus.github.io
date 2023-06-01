@@ -798,12 +798,8 @@ https://docs.google.com/spreadsheets/d/19CZs9mP9e16ygpjpaHuikuSXUSl9sgjryzwWawZ_
 ## Week 12
 
 ### Setting up to run pyLiBELa on the Cluster.
-- Creating a working local version of the [pyLiBELa Collab](https://colab.research.google.com/github/alessandronascimento/pyLiBELa/blob/main/Colabs/pyLiBELa.ipynb#scrollTo=mmqpdtV1CU49).
+- Creating a working local version of the [pyLiBELa Colab](https://colab.research.google.com/github/alessandronascimento/pyLiBELa/blob/main/Colabs/pyLiBELa.ipynb#scrollTo=mmqpdtV1CU49).
 
-
-tentando fazer rodar no cluster
-colocar a biblioteca glibc lá
-
-fiz código local
-
+- Having some trouble adapting the Makefile to the cluster's system specifications.
+- Wrote a script that does the same as the pyLiBELa Colab.
 
