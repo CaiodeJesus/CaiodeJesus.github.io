@@ -756,6 +756,7 @@ vendo se o timeit é em segundos (13s)
 
 ### Calculating Grids
 
+- We need to
 testar o espaçamento dos grids e o erro percentual
 	vimos que é 30 A pelo gráfico (https://caiodejesus.github.io/pyLiBELa/#pylibela-docking-grids)
 
