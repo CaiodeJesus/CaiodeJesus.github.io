@@ -750,7 +750,7 @@ If there is another residue that differs from its standard three letter name, it
 
 ### Calculating Grids
 - Now that the Colab environment is all set, we need to analyse how the percentual energy error is affected by grid spacing.
-- We saw tha, according to We need to
+- We saw that a grid size of 30 to We need to
 testar o espaçamento dos grids e o erro percentual
 	vimos que é 30 A pelo gráfico (https://caiodejesus.github.io/pyLiBELa/#pylibela-docking-grids)
 
