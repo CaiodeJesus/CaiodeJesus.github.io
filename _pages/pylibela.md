@@ -743,20 +743,14 @@ If there is another residue that differs from its standard three letter name, it
 
 ### pyLiBELa on google Colab
 
-preparando o terreno
-	me baseei no meu código https://github.com/CIERMag-FFPaivaStudents/Wavelet/blob/master/1D/metrics_1D.py pra organizar os dados
-	ecrevi em arquivos .dat e .csv (https://www.pythontutorial.net/python-basics/python-write-csv-file/)
-	ver quais valores eu coloco
-		rodar!
-		
-		
-vendo se o timeit é em segundos (13s)
-
+- I based my code in my [previous undergraduate research program](https://github.com/CIERMag-FFPaivaStudents/Wavelet/blob/master/1D/metrics_1D.py) to organize the data.
+- In the Colab, I write the Grid calculation data (time per atom, calculated energies, etc) in a .dat or .csv file. 
+- In order to calculate the time, I need to check if the tima calculated in the timeit library is in seconds. This was verified through this test. We can see that the time shown on the Colab cell is in seconds, and it corresponds numerically with the one printed.
 ![image](https://github.com/CaiodeJesus/CaiodeJesus.github.io/assets/84737515/642f9d61-4ebd-42f5-b13e-ec220e07c4ed)
 
 ### Calculating Grids
-
-- We need to
+- Now that the Colab environment is all set, we need to analyse how the percentual energy error is affected by grid spacing.
+- We saw tha, according to We need to
 testar o espaçamento dos grids e o erro percentual
 	vimos que é 30 A pelo gráfico (https://caiodejesus.github.io/pyLiBELa/#pylibela-docking-grids)
 
@@ -806,8 +800,9 @@ testar script pra máquina local
 
 
 
-
-
+### Useful links
+- [My previous undergraduate research program about Wavelet filters in MRI](https://github.com/CIERMag-FFPaivaStudents/Wavelet)
+- [Python Write CSV File](https://www.pythontutorial.net/python-basics/python-write-csv-file/)
 
 ## Week 12
 
