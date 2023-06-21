@@ -752,7 +752,8 @@ If there is another residue that differs from its standard three letter name, it
 - Now that the Colab environment is all set, we need to analyse how the percentual energy error is affected by grid spacing.
 - We saw that most ligands would fit in a grid box with size 30 according to this histogram
 ![image](https://caiodejesus.github.io/pyLiBELa/#pylibela-docking-grids)
-- The ideal percentual difference would be smaller than 5%
+- The ideal percentual difference would be smaller than 5%. We need to see the average difference for all the ligand from the SB dataset.
+- We may use some filters removing, for instance, positive energies
 diferença perentual (< q 5% é o ideal) - ver a média para todos
 	filtros - se a energia é positiva, tirar
 		tanto a das coordenadas quanto a dos grids
